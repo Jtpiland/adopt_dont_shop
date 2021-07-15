@@ -18,8 +18,8 @@ class AdoptionApplicationsController < ApplicationController
     else
       redirect_to "/pets/application/new"
       flash[:alert] = "Error: Field can't be left blank"
+    end
   end
-
 
   private
 
