@@ -21,6 +21,12 @@ class AdoptionApplicationsController < ApplicationController
     end
   end
 
+  def pets
+    @application = AdoptionApplication.find(params[:id])
+    @pets = @application.pets 
+  end
+
+
   private
 
   def app_params

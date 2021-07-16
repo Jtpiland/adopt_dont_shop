@@ -1,20 +1,30 @@
-<%= link_to "Start an Application", "pets/application/new" %>
+<div class="row">
+  <div class="col-lg-4 offset-lg-4">
+    <h1>All Pets</h1>
+  </div>
+</div>
 
-<h1>All pets</h1>
+<div class="container ">
+    <div class="col-md-3 offset-8"> <!-- col-sm= sizing for small browser, col-md, col-lg etc. -->
+      <%= form_with url: "/pets", method: :get, local: true do |f| %>
+      <%= f.text_field :search %>
+      <%= f.submit "Search" %>
+    </div>
+</div>
 
-<%= form_with url: "/pets", method: :get, local: true do |f| %>
-  <%= f.label :search %>
-  <%= f.text_field :search %>
-  <%= f.submit "Search" %>
-<% end %>
+  <% end %>
 
-
-<% @pets.each do |pet| %>
-  <h3><%= pet.name %></h3>
-  <p>Age: <%= pet.age %></p>
-  <p>Breed: <%= pet.breed %></p>
-  <p>Adoptable: </p>
-  <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
-  <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit" %>
-  <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete %>
-<% end %>
+<div class="row">
+  <% @pets.each do |pet| %>
+  <div class="col-md-3 offset-1">
+    <h3><%= pet.name %></h3>
+    <p>Age: <%= pet.age %></p>
+    <p>Breed: <%= pet.breed %></p>
+    <p>Adoptable: </p>
+    <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
+    <%= link_to "Start an Application", "pets/application/new" %>
+    <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit" %>
+    <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete %>
+  </div>
+  <% end %>
+</div>
