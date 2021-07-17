@@ -10,11 +10,13 @@ Pet.destroy_all
 Shelter.destroy_all
 AdoptionApplication.destroy_all
 
-@shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
-@pet_1 = @shelter.pets.create!(adoptable: true, age: 7, breed: 'sphynx', name: 'Bare-y Manilow')
-@pet_2 = @shelter.pets.create!(adoptable: true, age: 3, breed: 'domestic pig', name: 'Babe')
-@pet_3 = @shelter.pets.create!(adoptable: false, age: 4, breed: 'chihuahua', name: 'Elle')
-@pet_4 = @shelter.pets.create!(adoptable: true, age: 4, breed: 'pug', name: 'Jack')
+@shelter_1 = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+@shelter_2 = Shelter.create!(name: 'Austin Pets Alive', city: 'Austin, TX', foster_program: false, rank: 5)
+@shelter_3 = Shelter.create!(name: 'B Name', city: 'Tulsa, OK', foster_program: false, rank: 12)
+@pet_1 = @shelter_1.pets.create!(adoptable: true, age: 7, breed: 'sphynx', name: 'Bare-y Manilow')
+@pet_2 = @shelter_1.pets.create!(adoptable: true, age: 3, breed: 'domestic pig', name: 'Babe')
+@pet_3 = @shelter_2.pets.create!(adoptable: false, age: 4, breed: 'chihuahua', name: 'Elle')
+@pet_4 = @shelter_2.pets.create!(adoptable: true, age: 4, breed: 'pug', name: 'Jack')
 
 
 @applicant_1 = AdoptionApplication.create!(name: 'John John', street_address: '123 Street', city: 'Denver', state: 'CO', zip_code: 80014, description: 'I have lots of free time and a huge yard!', pets_applied_for: "#{@pet_1.name}", status: "In Progress")
