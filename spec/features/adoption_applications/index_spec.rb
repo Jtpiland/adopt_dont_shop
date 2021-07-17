@@ -29,4 +29,15 @@ RSpec.describe 'the application show page' do
 
     expect(current_path).to eq("/applications/#{@applicant_1.id}")
   end
+
+  it 'shows links to the other pages on the site' do
+
+    expect(page).to have_link("Home")
+    expect(page).to have_link("Pets")
+    expect(page).to have_link("Shelters")
+    expect(page).to have_link("Veterinarians")
+    expect(page).to have_link("Veterinary Offices")
+    expect(page).to have_link("Applications")
+  end
+
 end
