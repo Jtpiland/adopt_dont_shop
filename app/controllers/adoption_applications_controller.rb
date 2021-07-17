@@ -8,6 +8,9 @@ class AdoptionApplicationsController < ApplicationController
 
   def show
     @application = AdoptionApplication.find(params[:id])
+    if params[:search]
+      @pets = Pet.search(params[:search]).to_a
+    end
   end
 
   def create
@@ -23,9 +26,21 @@ class AdoptionApplicationsController < ApplicationController
 
   def pets
     @application = AdoptionApplication.find(params[:id])
-    @pets = @application.pets 
+    @pets = @application.pets
   end
 
+  def adopt
+    application = AdoptionApplication.find(params[:adoption_application_id])
+    pet = Pet.find(params[:pet_id])
+    application.pets << pet
+    redirect_to "/applications/#{application.id}"
+  end
+
+  def submit
+    @application = AdoptionApplication.find(params[:id])
+    @application.update(status: 'Pending')
+    redirect_to "/applications/#{@application.id}"
+  end
 
   private
 
