@@ -1,0 +1,10 @@
+<h1>Shelters</h1>
+<% @shelters.each do |shelter| %>
+<%= shelter.name %></br>
+<% end %>
+
+
+<h2> Shelters With Pending Applications</h2>
+<% Shelter.pending_applications.each do |shelter| %>
+<%= shelter.name %>
+<% end %>
