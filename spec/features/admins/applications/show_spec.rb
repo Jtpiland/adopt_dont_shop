@@ -32,16 +32,33 @@ RSpec.describe 'Admin Application Show Page' do
 
   it 'has buttons to approve or reject an application for each pet on the application' do
 
-    expect(page).to have_button('Approve')
-    expect(page).to have_button('Reject')
+    expect(page).to have_button('Approved')
+    expect(page).to have_button('Rejected')
   end
 
   it 'can redirect back to the admin application show page' do
 
-    click_button 'Approve'
+    click_button 'Approved'
 
     expect(current_path).to eq("/admin/applications/#{@applicant_1.id}")
   end
 
-  it 'changes the button to an indicator of approval after the application has been approved'
+  it 'changes the button to an indicator of approval after the application has been approved' do
+
+    click_button 'Approved'
+
+    expect(page).to have_content('Pet Approved')
+    expect(page).to_not have_button('Approved')
+    expect(page).to_not have_button('Rejected')
+  end
+
+  it 'changes the button to an indicator of rejection after the application has been rejected' do
+
+    click_button 'Rejected'
+
+    expect(page).to have_content('Pet Rejected')
+    expect(page).to_not have_button('Approved')
+    expect(page).to_not have_button('Rejected')
+  end
+
 end

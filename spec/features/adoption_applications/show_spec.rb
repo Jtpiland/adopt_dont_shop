@@ -26,4 +26,12 @@ RSpec.describe 'the application show page' do
 
     expect(page).to_not have_content(@applicant_2.name)
   end
+
+  it 'can add a description of why they would be a good home to the page from a form when an application is submitted' do
+
+    expect(page).to have_content('Why Would You Be a Good Home:')
+
+    # fill_in 
+  end
+
 end

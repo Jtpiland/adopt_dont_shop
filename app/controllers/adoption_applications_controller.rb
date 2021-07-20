@@ -38,7 +38,8 @@ class AdoptionApplicationsController < ApplicationController
 
   def submit
     @application = AdoptionApplication.find(params[:id])
-    @application.update(status: 'Pending')
+    @application.update(description: params[:description])
+    @application.update(status: params[:status])
     redirect_to "/applications/#{@application.id}"
   end
 
