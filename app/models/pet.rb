@@ -12,4 +12,16 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def approved?(application_id)
+    pet_adoption = PetAdoptionApplication.where(adoption_application_id: application_id, pet_id: id).first
+
+    pet_adoption.status == 'Approved'
+  end
+
+  def rejected?(application_id)
+    pet_adoption = PetAdoptionApplication.where(adoption_application_id: application_id, pet_id: id).first
+
+    pet_adoption.status == 'Rejected'
+  end
 end

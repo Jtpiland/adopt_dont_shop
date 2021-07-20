@@ -24,10 +24,10 @@ class AdoptionApplicationsController < ApplicationController
     end
   end
 
-  def pets
-    @application = AdoptionApplication.find(params[:id])
-    @pets = @application.pets
-  end
+  # def pets
+  #   @application = AdoptionApplication.find(params[:id])
+  #   @pets = @application.pets
+  # end
 
   def adopt
     application = AdoptionApplication.find(params[:adoption_application_id])
