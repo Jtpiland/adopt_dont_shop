@@ -38,9 +38,14 @@ class AdoptionApplicationsController < ApplicationController
 
   def submit
     @application = AdoptionApplication.find(params[:id])
-    @application.update(description: params[:description])
-    @application.update(status: params[:status])
-    redirect_to "/applications/#{@application.id}"
+    if !params[:description].empty?
+      @application.update(description: params[:description])
+      @application.update(status: params[:status])
+      redirect_to "/applications/#{@application.id}"
+    else
+      flash[:alert] = "Error: Field can't be left blank"
+      redirect_to "/applications/#{@application.id}"
+    end
   end
 
   private
