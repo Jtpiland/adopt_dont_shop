@@ -24,11 +24,6 @@ class AdoptionApplicationsController < ApplicationController
     end
   end
 
-  def pets
-    @application = AdoptionApplication.find(params[:id])
-    @pets = @application.pets
-  end
-
   def adopt
     application = AdoptionApplication.find(params[:adoption_application_id])
     pet = Pet.find(params[:pet_id])
@@ -36,16 +31,34 @@ class AdoptionApplicationsController < ApplicationController
     redirect_to "/applications/#{application.id}"
   end
 
-  def submit
+  def update #changed from submit
     @application = AdoptionApplication.find(params[:id])
-    @application.update(status: 'Pending')
-    redirect_to "/applications/#{@application.id}"
+    if !params[:description].empty?
+      @application.update(description: params[:description])
+      @application.update(status: params[:status])
+      redirect_to "/applications/#{@application.id}"
+    else
+      flash[:alert] = "Error: Field can't be left blank"
+      redirect_to "/applications/#{@application.id}"
+    end
   end
+
+  # def approve_app
+  #   @application = AdoptionApplication.find(params[:id])
+  #   require "pry"; binding.pry
+  #   @application.pets.each do |pets|
+  #     if pet.status == 'Accepted'
+  #      @application.update(status: 'Approved')
+  #     # else pet.status == 'Rejected'
+  #     #   @application.update(status: 'Rejected')
+  #     end
+  #   redirect_to "/admin/applications/#{@application.id}"
+  # end
+  # end
 
   private
 
   def app_params
     params.permit(:id, :name, :street_address, :city, :state, :zip_code, :description, :status)
   end
-
 end
