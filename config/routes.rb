@@ -41,11 +41,14 @@ Rails.application.routes.draw do
   get '/applications', to: 'adoption_applications#index'
   get '/applications/:id', to: 'adoption_applications#show'
   post '/applications/:adoption_application_id/:pet_id', to: 'adoption_applications#adopt'
-  post '/applications/:id', to: 'adoption_applications#submit'
+  post '/applications/:id', to: 'adoption_applications#update' #changed from submit
   post '/applications', to: 'adoption_applications#create'
 
   get '/admin/shelters', to: 'admins#index'
   get '/admin/applications/:id', to: "admins#show"
+  # get '/admin/applications/:id/approve', to: "admins#show"
+  # get '/admin/applications/:id/approve', to: "adoption_applications#approve_app"
 
   patch '/applications/:id/pets/:pet_id', to: "pet_adoption_applications#update"
+  patch '/admin/applications/:id', to: "pet_adoption_applications#update"
 end

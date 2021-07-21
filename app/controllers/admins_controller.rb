@@ -6,17 +6,4 @@ class AdminsController < ApplicationController
   def show
     @application = AdoptionApplication.find(params[:id])
   end
-
-  
-  # def approve_app
-  #   @application = AdoptionApplication.find(params[:id])
-  #   @application.pets.each do |pets|
-  #     # if pet.status == 'Accepted'
-  #      @application.update(status: 'Approved')
-  #     # else pet.status == 'Rejected'
-  #     #   @application.update(status: 'Rejected')
-  #     end
-  #
-  #   redirect_to "/admin/applications/#{@application.id}"
-  # end
 end
