@@ -13,13 +13,14 @@ class PetAdoptionApplicationsController < ApplicationController
 
     @pet_application = PetAdoptionApplication.where(adoption_application_id:params[:id], pet_id:params[:pet_id])
     @pet_application.update(status:params[:status])
-
-    if @pet_application.where(status: 'Rejected').count > 0
-      @application.update(status: 'Rejected') #changes status after each button click instead of the total
-    else
+    if PetAdoptionApplication.where(status: 'Approved').count == PetAdoptionApplication.count
       @application.update(status: 'Approved')
+    elsif PetAdoptionApplication.where(status: nil).any?
+      @application.status
+    else
+      @application.update(status: 'Rejected') 
     end
-    # require "pry"; binding.pry
+
     redirect_to "/admin/applications/#{params[:id]}"
   end
 

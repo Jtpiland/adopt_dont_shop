@@ -14,51 +14,58 @@ RSpec.describe 'Admin Application Show Page' do
     visit "/admin/applications/#{@applicant_1.id}"
   end
 
-#   As a visitor
-# When I visit an admin application show page ('/admin/applications/:id')
-# For every pet that the application is for, I see a button to approve the application for that specific pet
-# When I click that button
-# Then I'm taken back to the admin application show page
-# And next to the pet that I approved, I do not see a button to approve this pet
-# And instead I see an indicator next to the pet that they have been approved
-#
-# # As a visitor
-# # When there are two applications in the system for the same pet
-# # When I visit the admin application show page for one of the applications
-# # And I approve or reject the pet for that application
-# # When I visit the other application's admin show page
-# Then I do not see that the pet has been accepted or rejected for that application
-# And instead I see buttons to approve or reject the pet for this specific application
+    it 'has buttons to approve or reject an application for each pet on the application' do
 
-  it 'has buttons to approve or reject an application for each pet on the application' do
+      expect(page).to have_button('Approved')
+      expect(page).to have_button('Rejected')
+    end
 
-    expect(page).to have_button('Approved')
-    expect(page).to have_button('Rejected')
-  end
+    it 'can redirect back to the admin application show page' do
 
-  it 'can redirect back to the admin application show page' do
+      click_button 'Approved'
 
-    click_button 'Approved'
+      expect(current_path).to eq("/admin/applications/#{@applicant_1.id}")
+    end
 
-    expect(current_path).to eq("/admin/applications/#{@applicant_1.id}")
-  end
+    it 'changes the button to an indicator of approval after the application has been approved' do
 
-  it 'changes the button to an indicator of approval after the application has been approved' do
+      click_button 'Approved'
 
-    click_button 'Approved'
+      expect(page).to have_content('Pet Approved')
+      expect(page).to_not have_button('Approved')
+      expect(page).to_not have_button('Rejected')
+    end
 
-    expect(page).to have_content('Pet Approved')
-    expect(page).to_not have_button('Approved')
-    expect(page).to_not have_button('Rejected')
-  end
+    it 'changes the button to an indicator of rejection after the application has been rejected' do
 
-  it 'changes the button to an indicator of rejection after the application has been rejected' do
+      click_button 'Rejected'
 
-    click_button 'Rejected'
+      expect(page).to have_content('Pet Rejected')
+      expect(page).to_not have_button('Approved')
+      expect(page).to_not have_button('Rejected')
+    end
 
-    expect(page).to have_content('Pet Rejected')
-    expect(page).to_not have_button('Approved')
-    expect(page).to_not have_button('Rejected')
-  end
+    it 'starts with an application status of nil' do
 
+      expect(page).to have_content('Status:')
+      expect(@applicant_1.status).to eq(nil)
+    end
+
+    it 'changes the application status to approved if all pets have been approved for adoption' do
+
+      click_button 'Approved'
+
+      expect(page).to have_content('Status:Approved')
+
+      visit "/applications/#{@applicant_1.id}"
+
+      expect(PetAdoptionApplication.first.status).to eq('Approved')
+    end
+
+    it 'changes the application status to rejected if any pets have been rejected for adoption' do
+
+      click_button 'Rejected'
+
+      expect(page).to have_content('Status:Rejected')
+    end
 end

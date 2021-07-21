@@ -19,8 +19,8 @@ AdoptionApplication.destroy_all
 @pet_4 = @shelter_2.pets.create!(adoptable: true, age: 4, breed: 'pug', name: 'Jack')
 
 
-@applicant_1 = AdoptionApplication.create!(name: 'John John', street_address: '123 Street', city: 'Denver', state: 'CO', zip_code: 80014, pets_applied_for: "#{@pet_1.name}", status: "In Progress")
-@applicant_2 = AdoptionApplication.create!(name: 'Dan Dan', street_address: 'Fifth Street', city: 'Tulsa', state: 'OK', zip_code: 74105, pets_applied_for: "#{@pet_2.name}", status: "In Progress")
+@applicant_1 = AdoptionApplication.create!(name: 'John John', street_address: '123 Street', city: 'Denver', state: 'CO', zip_code: 80014, status: "In Progress")
+@applicant_2 = AdoptionApplication.create!(name: 'Dan Dan', street_address: 'Fifth Street', city: 'Tulsa', state: 'OK', zip_code: 74105, status: "In Progress")
 
-@pet_app_1 = PetAdoptionApplication.create!(pet: @pet_1, adoption_application: @applicant_1)
-@pet_app_2 = PetAdoptionApplication.create!(pet: @pet_2, adoption_application: @applicant_2)
+# @pet_app_1 = PetAdoptionApplication.create!(pet: @pet_1, adoption_application: @applicant_1)
+# @pet_app_2 = PetAdoptionApplication.create!(pet: @pet_2, adoption_application: @applicant_2)
