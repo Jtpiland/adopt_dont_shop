@@ -21,6 +21,3 @@ AdoptionApplication.destroy_all
 
 @applicant_1 = AdoptionApplication.create!(name: 'John John', street_address: '123 Street', city: 'Denver', state: 'CO', zip_code: 80014, status: "In Progress")
 @applicant_2 = AdoptionApplication.create!(name: 'Dan Dan', street_address: 'Fifth Street', city: 'Tulsa', state: 'OK', zip_code: 74105, status: "In Progress")
-
-# @pet_app_1 = PetAdoptionApplication.create!(pet: @pet_1, adoption_application: @applicant_1)
-# @pet_app_2 = PetAdoptionApplication.create!(pet: @pet_2, adoption_application: @applicant_2)
