@@ -1,13 +1,5 @@
 class PetAdoptionApplicationsController < ApplicationController
 
-  # def create
-  #   @application = AdoptionApplication.find(params[:adoption_application_id])
-  #   @pet = Pet.find(params[:pet_id])
-  #   @application.pets << pet
-  #
-  #   redirect_to "/applications/#{application.id}"
-  # end
-
   def update
     @application = AdoptionApplication.find(params[:id])
 
@@ -18,7 +10,7 @@ class PetAdoptionApplicationsController < ApplicationController
     elsif PetAdoptionApplication.where(status: nil).any?
       @application.status
     else
-      @application.update(status: 'Rejected') 
+      @application.update(status: 'Rejected')
     end
 
     redirect_to "/admin/applications/#{params[:id]}"
