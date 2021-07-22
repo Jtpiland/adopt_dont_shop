@@ -5,7 +5,7 @@
 </div>
 
 <div class="container ">
-    <div class="col-md-3 offset-8"> <!-- col-sm= sizing for small browser, col-md, col-lg etc. -->
+    <div class="col-md-3 offset-8"> 
       <%= form_with url: "/pets", method: :get, local: true do |f| %>
       <%= f.label :search, "Search" %>
       <%= f.text_field :search %>

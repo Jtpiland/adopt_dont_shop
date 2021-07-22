@@ -31,7 +31,7 @@ class AdoptionApplicationsController < ApplicationController
     redirect_to "/applications/#{application.id}"
   end
 
-  def update #changed from submit
+  def update 
     @application = AdoptionApplication.find(params[:id])
     if !params[:description].empty?
       @application.update(description: params[:description])
@@ -42,19 +42,6 @@ class AdoptionApplicationsController < ApplicationController
       redirect_to "/applications/#{@application.id}"
     end
   end
-
-  # def approve_app
-  #   @application = AdoptionApplication.find(params[:id])
-  #   require "pry"; binding.pry
-  #   @application.pets.each do |pets|
-  #     if pet.status == 'Accepted'
-  #      @application.update(status: 'Approved')
-  #     # else pet.status == 'Rejected'
-  #     #   @application.update(status: 'Rejected')
-  #     end
-  #   redirect_to "/admin/applications/#{@application.id}"
-  # end
-  # end
 
   private
 

@@ -19,7 +19,7 @@ RSpec.describe 'the admin shelters index page' do
   end
 
   it 'has a section with the name of every shelter that has a pending applications' do
-    #within block????
+    
     expect(page).to have_content("Shelters With Pending Applications")
     expect(Shelter.pending_applications).to eq([@shelter_1])
   end
